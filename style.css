@@ -30,15 +30,6 @@ img {
   width: 45%;
   height: auto;
 }
-
-#app{
-  height: auto;
-  padding: 1em;
-  margin: 7em 2em 3em;
-  border: 1px solid;
-  box-shadow: 5px 10px;
-  text-align:center;
-}
 .dark-mode #app{
   background:black;
   color:#fff;
@@ -70,6 +61,12 @@ body {
   color: black;
   font-size: 20px;
   padding-bottom: 0em;
+  height: auto;
+  padding: 1em;
+  margin: 7em 2em 3em;
+  border: 1px solid;
+  box-shadow: 5px 10px;
+  text-align:center;
 }
 
 .logo{

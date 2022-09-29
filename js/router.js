@@ -1,9 +1,9 @@
-function Router(routes) {
+function Router(rotas) {
     try {
-        if (!routes) {
-            throw 'error: routes param is mandatory';
+        if (!rotas) {
+            throw 'erro: rota invalida';
         }
-        this.constructor(routes);
+        this.constructor(rotas);
         this.init();
     } catch (e) {
         console.error(e);   
@@ -11,14 +11,14 @@ function Router(routes) {
 }
 
 Router.prototype = {
-    routes: undefined,
+    rotas: undefined,
     rootElem: undefined,
-    constructor: function (routes) {
-        this.routes = routes;
-        this.rootElem = document.getElementById('app');
+    constructor: function (rotas) {
+        this.rotas = rotas;
+        this.rootElem = document.body;
     },
     init: function () {
-        var r = this.routes;
+        var r = this.rotas;
         (function(scope, r) { 
             window.addEventListener('hashchange', function (e) {
                 scope.hasChanged(scope, r);
@@ -29,24 +29,23 @@ Router.prototype = {
     hasChanged: function(scope, r){
         if (window.location.hash.length > 0) {
             for (var i = 0, length = r.length; i < length; i++) {
-                var route = r[i];
-                if(route.isActiveRoute(window.location.hash.substr(1))) {
-                    scope.goToRoute(route.htmlName);
+                var rota = r[i];
+                if(rota.isActiveRoute(window.location.hash.substr(1))) {
+                    scope.goToRoute(rota.htmlName);
                 }
             }
         } else {
             for (var i = 0, length = r.length; i < length; i++) {
-                var route = r[i];
-                if(route.default) {
-                    scope.goToRoute(route.htmlName);
+                var rota = r[i];
+                if(rota.default) {
+                    scope.goToRoute(rota.htmlName);
                 }
             }
         }
     },
-    goToRoute: function (htmlName) {
+    goToRoute: function (caminho) {
         (function(scope) { 
-            var url = 'views/' + htmlName,
-                xhttp = new XMLHttpRequest();
+            var url = 'views/' + caminho,xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     scope.rootElem.innerHTML = this.responseText;
